@@ -52,7 +52,7 @@ public class AlunoService {
     }
 
     public boolean deleteAluno(UUID id) {
-        if (alunoRepository.findById(id).isPresent()) {
+        if (alunoRepository.existsById(id)) {
             alunoRepository.deleteById(id);
             return true;
         }

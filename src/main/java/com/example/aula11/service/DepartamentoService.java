@@ -55,7 +55,7 @@ public class DepartamentoService {
     }
 
     public boolean deleteDepartamento(UUID id) {
-        if (departamentoRepository.findById(id).isPresent()) {
+        if (departamentoRepository.existsById(id)) {
             departamentoRepository.deleteById(id);
             return true;
         }

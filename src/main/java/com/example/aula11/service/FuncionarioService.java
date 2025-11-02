@@ -51,7 +51,7 @@ public class FuncionarioService {
     }
 
     public boolean deleteFuncionario(UUID id) {
-        if (funcionarioRepository.findById(id).isPresent()) {
+        if (funcionarioRepository.existsById(id)) {
             funcionarioRepository.deleteById(id);
             return true;
         }

@@ -2,11 +2,17 @@ package com.example.aula11.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 import java.util.UUID;
 
+@Entity
+@Table(name = "professores")
 @Data
 @NoArgsConstructor
 public class Professor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "BINARY(16)")
     private UUID idProfessor;
     private String nomeCompleto;
     private String cpfRegistroFuncional;
@@ -16,10 +22,9 @@ public class Professor {
     private String areaDeAtuacao;
     private String regimeTrabalho;
 
-    // Construtor do DTO
+    // Construtor do DTO (sem o ID - será gerado pelo JPA)
     public Professor(String nomeCompleto, String cpfRegistroFuncional, String emailInstitucional, String telefone,
             String titulacao, String areaDeAtuacao, String regimeTrabalho) {
-        this.idProfessor = UUID.randomUUID();
         this.nomeCompleto = nomeCompleto;
         this.cpfRegistroFuncional = cpfRegistroFuncional;
         this.emailInstitucional = emailInstitucional;

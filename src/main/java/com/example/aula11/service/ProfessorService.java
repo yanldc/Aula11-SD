@@ -53,7 +53,7 @@ public class ProfessorService {
     }
 
     public boolean deleteProfessor(UUID id) {
-        if (professorRepository.findById(id).isPresent()) {
+        if (professorRepository.existsById(id)) {
             professorRepository.deleteById(id);
             return true;
         }

@@ -121,6 +121,17 @@ A aplicação estará disponível em: `http://localhost:8080`
 
 - Java 11
 - Spring Boot 2.7.18
+- Spring Data JPA
+- H2 Database (em memória)
 - Maven
 - Lombok
-- Dados em memória (não persistem após reiniciar)
+
+## 💾 Banco de Dados
+
+- **H2 Database** (em memória)
+- **Console H2:** `http://localhost:8080/h2-console`
+- **URL JDBC:** `jdbc:h2:mem:testdb`
+- **Usuário:** `sa`
+- **Senha:** (vazio)
+
+Os dados são persistidos durante a execução da aplicação e são perdidos ao reiniciar.
