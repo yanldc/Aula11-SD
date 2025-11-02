@@ -1,6 +1,6 @@
 # API Universidade - Sistema de Gestão Acadêmica
 
-API REST para gerenciamento de entidades acadêmicas (Alunos, Professores, Funcionários e Departamentos).
+API REST para gerenciamento de entidades acadêmicas (Alunos, Professores, Funcionários e Departamentos) com persistência H2.
 
 ## 🚀 Como executar
 
@@ -13,7 +13,6 @@ A aplicação estará disponível em: `http://localhost:8080`
 ## 📋 Entidades
 
 ### Aluno
-
 - ID (UUID)
 - Nome completo
 - Data de nascimento
@@ -23,7 +22,6 @@ A aplicação estará disponível em: `http://localhost:8080`
 - Telefone
 
 ### Professor
-
 - ID (UUID)
 - Nome completo
 - CPF/Registro funcional
@@ -34,7 +32,6 @@ A aplicação estará disponível em: `http://localhost:8080`
 - Regime de trabalho (20h, 40h, DE)
 
 ### Funcionário
-
 - ID (UUID)
 - Nome completo
 - CPF/Registro funcional
@@ -44,7 +41,6 @@ A aplicação estará disponível em: `http://localhost:8080`
 - Tipo de vínculo (CLT, estatutário, terceirizado, bolsista)
 
 ### Departamento
-
 - ID (UUID)
 - Nome
 - Sigla
@@ -57,7 +53,6 @@ A aplicação estará disponível em: `http://localhost:8080`
 ## 🛠️ Endpoints
 
 ### Alunos
-
 - `GET /api/alunos` - Listar todos
 - `GET /api/alunos/{id}` - Buscar por ID
 - `POST /api/alunos` - Criar novo
@@ -65,7 +60,6 @@ A aplicação estará disponível em: `http://localhost:8080`
 - `DELETE /api/alunos/{id}` - Deletar
 
 ### Professores
-
 - `GET /api/professores` - Listar todos
 - `GET /api/professores/{id}` - Buscar por ID
 - `POST /api/professores` - Criar novo
@@ -73,7 +67,6 @@ A aplicação estará disponível em: `http://localhost:8080`
 - `DELETE /api/professores/{id}` - Deletar
 
 ### Funcionários
-
 - `GET /api/funcionarios` - Listar todos
 - `GET /api/funcionarios/{id}` - Buscar por ID
 - `POST /api/funcionarios` - Criar novo
@@ -81,18 +74,17 @@ A aplicação estará disponível em: `http://localhost:8080`
 - `DELETE /api/funcionarios/{id}` - Deletar
 
 ### Departamentos
-
 - `GET /api/departamentos` - Listar todos
 - `GET /api/departamentos/{id}` - Buscar por ID
 - `POST /api/departamentos` - Criar novo
 - `PUT /api/departamentos/{id}` - Atualizar
 - `DELETE /api/departamentos/{id}` - Deletar
 
-## 📝 Exemplo de uso (POST)
+## 📝 Exemplos de uso
 
 ### Criar Aluno
-
 ```json
+POST /api/alunos
 {
   "nomeCompleto": "João Silva",
   "dataNascimento": "2000-05-15",
@@ -104,8 +96,8 @@ A aplicação estará disponível em: `http://localhost:8080`
 ```
 
 ### Criar Professor
-
 ```json
+POST /api/professores
 {
   "nomeCompleto": "Dr. Maria Santos",
   "cpfRegistroFuncional": "987.654.321-00",
@@ -114,6 +106,34 @@ A aplicação estará disponível em: `http://localhost:8080`
   "titulacao": "Doutor",
   "areaDeAtuacao": "Ciência da Computação",
   "regimeTrabalho": "DE"
+}
+```
+
+### Criar Funcionário
+```json
+POST /api/funcionarios
+{
+  "nomeCompleto": "Carlos Oliveira",
+  "cpfRegistroFuncional": "456.789.123-00",
+  "emailInstitucional": "carlos.oliveira@universidade.edu.br",
+  "telefone": "(11) 77777-7777",
+  "cargo": "Técnico Administrativo",
+  "tipoVinculo": "CLT"
+}
+```
+
+### Criar Departamento
+```json
+POST /api/departamentos
+{
+  "nome": "Departamento de Computação",
+  "sigla": "DC",
+  "centroUnidadeAcademica": "Centro de Ciências Exatas",
+  "chefeDepartamentoId": null,
+  "tipoChefe": null,
+  "emailContato": "dc@universidade.edu.br",
+  "telefoneRamal": "1234",
+  "localizacao": "Prédio A - Sala 101"
 }
 ```
 
@@ -135,3 +155,41 @@ A aplicação estará disponível em: `http://localhost:8080`
 - **Senha:** (vazio)
 
 Os dados são persistidos durante a execução da aplicação e são perdidos ao reiniciar.
+
+### Consultas SQL úteis
+```sql
+SELECT * FROM alunos;
+SELECT * FROM professores;
+SELECT * FROM funcionarios;
+SELECT * FROM departamentos;
+```
+
+## 📦 Postman Collection
+
+O projeto inclui um arquivo de importação para Postman com testes pré-configurados:
+
+- **Arquivo:** `Aula 11.postman_collection.json`
+- **Localização:** Raiz do projeto
+- **Como usar:** Importe este arquivo no Postman para ter acesso a todos os endpoints com exemplos de requisições já configurados
+
+O arquivo contém testes para todas as operações CRUD (Create, Read, Update, Delete) de todas as entidades.
+
+## 🧪 Como testar
+
+1. **Inicie a aplicação:** `mvn spring-boot:run`
+2. **Importe a collection** no Postman
+3. **Teste a sequência:**
+   - POST para criar registros
+   - GET para listar todos
+   - GET por ID para buscar específico
+   - PUT para atualizar
+   - DELETE para remover
+4. **Verifique no H2 Console** os dados persistidos
+
+## 📊 Códigos de Resposta
+
+- **200 OK** - GET, PUT bem-sucedidos
+- **201 Created** - POST bem-sucedido
+- **204 No Content** - DELETE bem-sucedido
+- **404 Not Found** - Recurso não encontrado
+- **400 Bad Request** - Dados inválidos no JSON
