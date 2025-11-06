@@ -3,6 +3,7 @@ package com.example.aula11.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +21,16 @@ public class Funcionario {
     private String telefone;
     private String cargo;
     private String tipoVinculo;
+    
+    @ManyToOne
+    @JoinColumn(name = "departamento_id")
+    private Departamento departamento;
+    
+    @ManyToMany(mappedBy = "funcionarios")
+    private List<Professor> professores;
+    
+    @ManyToMany(mappedBy = "funcionarios")
+    private List<Aluno> alunos;
 
     // Construtor do DTO (sem o ID - será gerado pelo JPA)
     public Funcionario(String nomeCompleto, String cpfRegistroFuncional, String emailInstitucional, String telefone,
